@@ -10,11 +10,10 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { data } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const sendForm = () => {
     alert(`${email}  ${password} `);
-    console.log(data.info);
   };
  
   return (

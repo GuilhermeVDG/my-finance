@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Background, Container, AreaInput, Logo, Input, SubmitButton, SubmitText, Link, LinkText } from '../SignIn/styles';
+import { AuthContext } from '../../contexts/auth';
 
 export default function SignUp() {
   const navigation = useNavigation();
@@ -10,8 +11,10 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [ name, setName ] = useState('');
 
+  const { signUp } = useContext(AuthContext);
+
   const sendForm = () => {
-    alert(`${name} ${email} ${password}`);
+    signUp(name, email, password)
   };
  
   return (
