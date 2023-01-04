@@ -1,11 +1,21 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { Platform } from 'react-native';
 import { Background, Container, AreaInput, Logo, Input, SubmitButton, SubmitText, Link, LinkText } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SignIn() {
- return (
+  const navigation = useNavigation();
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const sendForm = () => {
+    alert(`${email}  ${password}`);
+  };
+ 
+  return (
    <Background>
-    <Container>
+    <Container behavior={Platform.OS === 'ios' ? 'padding' : ''} enabled >
       <Logo source={require('../../assets/logo.png')}/>
 
       <AreaInput>
@@ -13,6 +23,8 @@ export default function SignIn() {
           placeholder="Email..."
           autoCorrect={false}
           autoCapitalize="none"
+          value={email}
+          onChangeText={ email => setEmail(email) }
         />
       </AreaInput>
       <AreaInput>
@@ -20,13 +32,15 @@ export default function SignIn() {
           placeholder="Senha..."
           autoCorrect={false}
           autoCapitalize="none"
+          value={password}
+          onChangeText={ password => setPassword(password) }
         />
       </AreaInput>
-      <SubmitButton>
+      <SubmitButton onPress={sendForm}>
         <SubmitText>Entrar</SubmitText>
       </SubmitButton>
 
-      <Link>
+      <Link onPress={ () => navigation.navigate('SignUp') } >
         <LinkText>Não possui uma conta? Cadastre-se aqui!</LinkText>
       </Link>
 
