@@ -8,8 +8,8 @@ export default function AuthProvider ({ children }) {
 
   const signUp = async (name, email, password) => {
     await firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(async res => {
-        const uid = res.user.uid;
+      .then(async value => {
+        const uid = value.user.uid;
         await firebase.database().ref('users').child(uid).set({
           amount: 0,
           name: name
@@ -18,15 +18,32 @@ export default function AuthProvider ({ children }) {
             const data = {
               uid: uid,
               name: name,
-              email: res.user.email
+              email: value.user.email
             }
             setUser(data)
           });
       })
   }
+
+  const signIn = async (email, password) => {
+    await firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(async value => {
+        const uid = value.user.uid;
+        await firebase.database().ref('users').child(uid).once('value')
+          .then(snapshot => {
+            const data = {
+              uid: uid,
+              name: snapshot.val().name,
+              email: value.user.email
+            };
+            setUser(data);
+          })
+      })
+      .catch(err => console.log(err));
+  }
   
   return(
-    <AuthContext.Provider value={{ isAuthenticated: !!user, signUp, user }}>
+    <AuthContext.Provider value={{ isAuthenticated: !!user, signUp, signIn, user }}>
       {children}
     </AuthContext.Provider>
   );
