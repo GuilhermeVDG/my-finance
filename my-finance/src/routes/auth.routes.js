@@ -11,7 +11,16 @@ export default function AuthRoutes() {
     <AuthStack.Navigator>
       <AuthStack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }}/>
 
-      <AuthStack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }}/>
+      <AuthStack.Screen name="SignUp" component={SignUp} options={{
+        headerStyle: {
+          backgroundColor: '#131313',
+          borderBottomColor: '#008037',
+          borderBottomWidth: 1,
+        },
+        headerBackTitleVisible: false,
+        headerTitle: 'Voltar',
+        headerTintColor: '#fff'
+      }}/>
     </AuthStack.Navigator>
 
     
