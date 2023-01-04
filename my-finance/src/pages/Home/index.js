@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
+import { AuthContext } from '../../contexts/auth';
 
 export default function Home() {
- return (
+ const { user } = useContext(AuthContext);
+ 
+  return (
    <View>
-    <Text>HOME PAGE</Text>
+    <Text>{user.name}</Text>
    </View>
   );
 }

@@ -1,10 +1,25 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import firebase from '../services/firebaseConnection';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext();
 
 export default function AuthProvider ({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const loadStorage = async () => {
+      const storageUser = await AsyncStorage.getItem('auth');
+
+      if(storageUser) {
+        setUser(JSON.parse(storageUser));
+      }
+
+      setLoading(false);
+    }
+    loadStorage();
+  }, []);
 
   const signUp = async (name, email, password) => {
     await firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -21,8 +36,13 @@ export default function AuthProvider ({ children }) {
               email: value.user.email
             }
             setUser(data)
+            storeUser(data);
           });
       })
+  }
+
+  const storeUser = async data => {
+    await AsyncStorage.setItem('auth', JSON.stringify(data));
   }
 
   const signIn = async (email, password) => {
@@ -37,13 +57,14 @@ export default function AuthProvider ({ children }) {
               email: value.user.email
             };
             setUser(data);
+            storeUser(data);
           })
       })
       .catch(err => console.log(err));
   }
   
   return(
-    <AuthContext.Provider value={{ isAuthenticated: !!user, signUp, signIn, user }}>
+    <AuthContext.Provider value={{ isAuthenticated: !!user, signUp, signIn, user, loading }}>
       {children}
     </AuthContext.Provider>
   );
