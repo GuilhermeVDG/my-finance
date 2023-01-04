@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Platform } from 'react-native';
 import { Background, Container, AreaInput, Logo, Input, SubmitButton, SubmitText, Link, LinkText } from './styles';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../../contexts/auth';
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -9,8 +10,11 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { data } = useContext(AuthContext);
+
   const sendForm = () => {
-    alert(`${email}  ${password}`);
+    alert(`${email}  ${password} `);
+    console.log(data.info);
   };
  
   return (
