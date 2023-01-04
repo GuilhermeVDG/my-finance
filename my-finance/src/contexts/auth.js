@@ -62,9 +62,15 @@ export default function AuthProvider ({ children }) {
       })
       .catch(err => console.log(err));
   }
+
+  const signOut = async () => {
+    await firebase.auth().signOut();
+    await AsyncStorage.clear()
+      .then(() => setUser(null));
+  }
   
   return(
-    <AuthContext.Provider value={{ isAuthenticated: !!user, signUp, signIn, user, loading }}>
+    <AuthContext.Provider value={{ isAuthenticated: !!user, signUp, signIn, signOut, user, loading }}>
       {children}
     </AuthContext.Provider>
   );
