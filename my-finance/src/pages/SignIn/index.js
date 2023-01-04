@@ -37,6 +37,7 @@ export default function SignIn() {
           autoCapitalize="none"
           value={password}
           onChangeText={ password => setPassword(password) }
+          secureTextEntry={true}
         />
       </AreaInput>
       <SubmitButton onPress={sendForm}>
