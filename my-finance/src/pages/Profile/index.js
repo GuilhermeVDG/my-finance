@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Container, Name, Email, New, NewText, Logout, LogoutText } from './styles';
 import { AuthContext } from '../../contexts/auth';
 import { useNavigation } from '@react-navigation/native';
+import Header from '../../components/Header';
 
 export default function Profile() {
   const { user, signOut } = useContext(AuthContext);
@@ -13,6 +14,7 @@ export default function Profile() {
  
   return (
    <Container>
+    <Header/>
     <Name>
       {user.name}
     </Name>
