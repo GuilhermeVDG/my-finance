@@ -9,7 +9,7 @@ const AppDrawer = createDrawerNavigator();
 
 export default function AppRoutes() {
   return(
-      <AppDrawer.Navigator initialRouteName="Home" drawerStyle={{
+      <AppDrawer.Navigator drawerStyle={{
         backgroundColor: '#171717'
       }}
       drawerContentOptions={{
@@ -25,7 +25,7 @@ export default function AppRoutes() {
         }
       }}>
         <AppDrawer.Screen name="Home" component={Home}/>
-        <AppDrawer.Screen name="Novo" component={New}/>
+        <AppDrawer.Screen name="Novo Registro" component={New}/>
         <AppDrawer.Screen name="Perfil" component={Profile}/>
       </AppDrawer.Navigator>
   );

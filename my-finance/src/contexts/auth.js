@@ -65,6 +65,8 @@ export default function AuthProvider ({ children }) {
 
   const signOut = async () => {
     await firebase.auth().signOut();
+    const token = await AsyncStorage.getItem('auth');
+    console.log(token);
     await AsyncStorage.clear()
       .then(() => setUser(null));
   }

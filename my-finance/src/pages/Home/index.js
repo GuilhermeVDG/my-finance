@@ -22,7 +22,7 @@ export default function Home() {
       <Header/>
       <Container>
         <Name>{user.name}</Name>
-        <Amount>R$ 132,00</Amount>
+        <Amount>R$ 400,00</Amount>
       </Container>
 
       <Title>Ultimas operações</Title>
