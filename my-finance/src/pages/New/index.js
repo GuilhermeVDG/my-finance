@@ -8,6 +8,12 @@ import ModalPicker from '../../components/ModalPicker';
 export default function New() {
   const [value, setValue] = useState(null);
   const [modalTypeVisible, setModalTypeVisible] = useState(false);
+  const [typeSelected, setTypeSelected] = useState('');
+
+  const handleTypeSelected = (option) => {
+    setTypeSelected(option);
+    console.log(typeSelected);
+  }
  
   return (
    <TouchableWithoutFeedback onPress={ () => Keyboard.dismiss() }>
@@ -32,7 +38,10 @@ export default function New() {
       </ButtonSubmit>
 
       <Modal transparent={true} visible={modalTypeVisible}>
-        <ModalPicker/>
+        <ModalPicker
+          handleCloseModal={ () => setModalTypeVisible(false) }
+          typeSelected={handleTypeSelected}
+        />
       </Modal>
     </Container>
    </TouchableWithoutFeedback>
