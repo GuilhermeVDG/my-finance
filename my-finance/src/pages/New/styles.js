@@ -12,7 +12,6 @@ export const Input = styled.TextInput.attrs({
   background-color: #ddd;
   width: 90%;
   font-size: 17px;
-  color: #fff;
   margin-bottom: 17px;
   margin-top: 10px;
   padding: 10px;
