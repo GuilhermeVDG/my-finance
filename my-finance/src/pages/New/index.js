@@ -77,6 +77,8 @@ export default function New() {
               }
             ]
           );
+          Keyboard.dismiss();
+          navigation.navigate('Home');
           return;
         }
 

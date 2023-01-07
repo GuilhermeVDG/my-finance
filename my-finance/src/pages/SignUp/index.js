@@ -53,7 +53,7 @@ export default function SignUp() {
       />
     </AreaInput>
     <SubmitButton onPress={sendForm}>
-      <SubmitText>Entrar</SubmitText>
+      <SubmitText>Cadastrar</SubmitText>
     </SubmitButton>
 
     <Link onPress={ () => navigation.navigate('SignIn') } >
