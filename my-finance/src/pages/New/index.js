@@ -59,24 +59,14 @@ export default function New() {
 
     const key = await firebase.database().ref('history').child(uid).push().key;
 
-    await firebase.database().ref('history').child(uid).child(key).set({
-      type: typeSelected,
-      value: parseFloat(value),
-      date: format(new Date(), 'dd/MM/yy')
-    });
-
     const user = await firebase.database().ref('users').child(uid);
     await user.once('value')
-      .then( snapshot => {
+      .then( async snapshot => {
         let amount = parseFloat(snapshot.val().amount);
 
-        if(typeSelected === 'receive'){
-          amount += parseFloat(value);
-          user.child('amount').set(amount);
-          return;
-        }
+        if(typeSelected === 'receive') amount += parseFloat(value);
 
-        if(amount < value) {
+        if(typeSelected === 'expense' && amount < value) {
           Alert.alert(
             'Alerta!',
             'Seu saldo é menor que o valor desejado.',
@@ -91,6 +81,12 @@ export default function New() {
         }
 
         if(typeSelected === 'expense') amount -= parseFloat(value);
+
+        await firebase.database().ref('history').child(uid).child(key).set({
+          type: typeSelected,
+          value: parseFloat(value),
+          date: format(new Date(), 'dd/MM/yy')
+        });
 
         user.child('amount').set(amount);
 

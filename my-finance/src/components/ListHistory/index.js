@@ -12,7 +12,7 @@ export default function ListHistory({ data }) {
       </IconView> 
     </Type>
     <ValueText>
-      R$ {data.value},00
+      R$ {data.value.toFixed(2)}
     </ValueText>
    </Container>
   );
