@@ -6,10 +6,11 @@ export const Container = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0,0,0,0.6);
 `;
 
 export const Content = styled.View`
-  height: 50%;
+  height: 125px;
   width: 90%;
   background-color: #ddd;
   border-width: 1px;
@@ -27,6 +28,7 @@ export const Option = styled.TouchableOpacity`
 export const OptionText = styled.Text`
   font-size: 17px;
   margin: 18px;
+  height: 25px;
   font-weight: bold;
   color: #000;
 `;

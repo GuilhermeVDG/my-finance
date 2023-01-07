@@ -36,7 +36,7 @@ export const TextSelect = styled.Text`
 `;
 
 export const ButtonSubmit = styled.TouchableOpacity`
-  background-color: #008037;
+  background-color: ${props => props.type === 'expense' ? '#c62c35' : '#008037'};
   height: 45px;
   align-items: center;
   justify-content: center;

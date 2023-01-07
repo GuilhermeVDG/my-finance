@@ -12,13 +12,14 @@ export default function ModalPicker({ handleCloseModal, typeSelected }) {
    <Container onPress={handleCloseModal}>
     <Content>
       <ScrollView>
+        <Option onPress={ () => onPressOption('receive') } >
+          <OptionText>Receita</OptionText>
+        </Option>
+        
         <Option onPress={ () => onPressOption('expense') }>
           <OptionText>Despesa</OptionText>
         </Option>
 
-        <Option onPress={ () => onPressOption('receive') } >
-          <OptionText>Receita</OptionText>
-        </Option>
       </ScrollView>
     </Content>
    </Container>

@@ -9,7 +9,7 @@ export default function Profile() {
   const navigation = useNavigation();
 
   const handleNew = () => {
-    navigation.navigate('Novo');
+    navigation.navigate('Novo Registro');
   }
  
   return (
