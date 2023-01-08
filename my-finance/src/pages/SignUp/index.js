@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Platform } from 'react-native';
+import { Platform, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Background, Container, AreaInput, Logo, Input, SubmitButton, SubmitText, Link, LinkText } from '../SignIn/styles';
 import { AuthContext } from '../../contexts/auth';
