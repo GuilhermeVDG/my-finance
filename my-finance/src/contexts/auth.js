@@ -6,7 +6,8 @@ export const AuthContext = createContext();
 
 export default function AuthProvider ({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(false);
 
   useEffect(() => {
     const loadStorage = async () => {
@@ -22,6 +23,7 @@ export default function AuthProvider ({ children }) {
   }, []);
 
   const signUp = async (name, email, password) => {
+    setAuthLoading(true);
     await firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(async value => {
         const uid = value.user.uid;
@@ -37,6 +39,12 @@ export default function AuthProvider ({ children }) {
             }
             setUser(data)
             storeUser(data);
+            setAuthLoading(false);
+          })
+          .catch(err => {
+            console.log(err);
+            alert('Falha ao cadastrar.');
+            setAuthLoading(false);
           });
       })
   }
@@ -46,6 +54,7 @@ export default function AuthProvider ({ children }) {
   }
 
   const signIn = async (email, password) => {
+    setAuthLoading(true);
     await firebase.auth().signInWithEmailAndPassword(email, password)
       .then(async value => {
         const uid = value.user.uid;
@@ -58,9 +67,14 @@ export default function AuthProvider ({ children }) {
             };
             setUser(data);
             storeUser(data);
+            setAuthLoading(false);
           })
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        alert('Usuario ou senha inválidos.')
+        setAuthLoading(false);
+      });
   }
 
   const signOut = async () => {
@@ -72,7 +86,7 @@ export default function AuthProvider ({ children }) {
   }
   
   return(
-    <AuthContext.Provider value={{ isAuthenticated: !!user, signUp, signIn, signOut, user, loading }}>
+    <AuthContext.Provider value={{ isAuthenticated: !!user, signUp, signIn, signOut, user, loading, authLoading }}>
       {children}
     </AuthContext.Provider>
   );

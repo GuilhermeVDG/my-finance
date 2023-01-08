@@ -11,7 +11,7 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [ name, setName ] = useState('');
 
-  const { signUp } = useContext(AuthContext);
+  const { signUp, authLoading } = useContext(AuthContext);
 
   const sendForm = () => {
     signUp(name, email, password)
@@ -53,7 +53,7 @@ export default function SignUp() {
       />
     </AreaInput>
     <SubmitButton onPress={sendForm}>
-      <SubmitText>Cadastrar</SubmitText>
+      { authLoading ? <ActivityIndicator size={20} color="#000000" /> : <SubmitText>Entrar</SubmitText> }
     </SubmitButton>
 
     <Link onPress={ () => navigation.navigate('SignIn') } >
