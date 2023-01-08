@@ -53,7 +53,7 @@ export default function SignUp() {
       />
     </AreaInput>
     <SubmitButton onPress={sendForm}>
-      { authLoading ? <ActivityIndicator size={20} color="#000000" /> : <SubmitText>Entrar</SubmitText> }
+      { authLoading ? <ActivityIndicator size={20} color="#000000" /> : <SubmitText>Cadastrar</SubmitText> }
     </SubmitButton>
 
     <Link onPress={ () => navigation.navigate('SignIn') } >

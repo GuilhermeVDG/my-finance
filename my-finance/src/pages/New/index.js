@@ -14,7 +14,7 @@ export default function New() {
   
   const [value, setValue] = useState('');
   const [modalTypeVisible, setModalTypeVisible] = useState(false);
-  const [typeSelected, setTypeSelected] = useState('Receita');
+  const [typeSelected, setTypeSelected] = useState('receive');
 
   const { user: contextUser } = useContext(AuthContext);
 
@@ -78,7 +78,6 @@ export default function New() {
             ]
           );
           Keyboard.dismiss();
-          navigation.navigate('Home');
           return;
         }
 
