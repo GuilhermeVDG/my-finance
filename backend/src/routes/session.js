@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 
 export default class Session {
   constructor() {
@@ -6,9 +6,7 @@ export default class Session {
   }
 
   setup() {
-    this.routes.get('/test', (req, res) => {
-      return res.json({ ok: true });
-    });
+    this.routes.get('/test', (req, res) => res.json({ ok: true }));
 
     return this.routes;
   }

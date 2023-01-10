@@ -11,7 +11,7 @@ export default class App {
     this.app.use(this.routes.setup());
   }
 
-  startServer () {
+  startServer() {
     this.app.listen(3080, () => {
       console.log('Server started in port 3080');
     });

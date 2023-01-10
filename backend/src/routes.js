@@ -1,15 +1,15 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import SessionRoutes from "./routes/session";
+import SessionRoutes from './routes/session';
 
 export default class Routes {
-  constructor(){
+  constructor() {
     this.routes = new Router();
 
     this.sessionRoutes = new SessionRoutes();
   }
 
-  setup(){
+  setup() {
     this.routes.use('/', this.sessionRoutes.setup());
 
     return this.routes;
