@@ -1,7 +1,10 @@
 import SessionServices from '../services/session';
+import Base from './base';
 
-export default class Session {
+export default class Session extends Base {
   constructor() {
+    super();
+
     this.store = this.store.bind(this);
 
     this.sessionServices = new SessionServices();
@@ -10,10 +13,9 @@ export default class Session {
   async store(req, res) {
     try {
       const response = await this.sessionServices.store(req.body);
-      return res.status(200).send(response);
+      this.handleSuccess(res, response);
     } catch (error) {
-      console.log(error);
-      return res.status(400).json(error);
+      this.handleError(res, error);
     }
   }
 }
