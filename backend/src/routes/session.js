@@ -11,6 +11,7 @@ export default class Session {
 
   setup() {
     this.routes.post('/store', this.sessionController.store);
+    this.routes.post('/login', this.sessionController.login);
 
     return this.routes;
   }

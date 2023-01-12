@@ -6,6 +6,7 @@ export default class Session extends Base {
     super();
 
     this.store = this.store.bind(this);
+    this.login = this.login.bind(this);
 
     this.sessionServices = new SessionServices();
   }
@@ -13,6 +14,15 @@ export default class Session extends Base {
   async store(req, res) {
     try {
       const response = await this.sessionServices.store(req.body);
+      this.handleSuccess(res, response);
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  async login(req, res) {
+    try {
+      const response = await this.sessionServices.login(req.body);
       this.handleSuccess(res, response);
     } catch (error) {
       this.handleError(res, error);
