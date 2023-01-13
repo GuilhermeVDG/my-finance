@@ -21,8 +21,6 @@ export default class Users extends Base {
   async update(userId, data) {
     const user = await User.findByPk(userId);
 
-    console.log(user);
-
     if (!user) throw this.handleException('USER_NOT_FOUND', 400);
 
     if (data.password && !(await user.checkPassword(data.oldPassword))) {
@@ -45,6 +43,18 @@ export default class Users extends Base {
       id,
       name,
       email,
+    };
+  }
+
+  async delete(userId) {
+    const user = await User.findByPk(userId);
+
+    if (!user) throw this.handleException('USER_NOT_FOUND', 400);
+
+    await user.destroy();
+
+    return {
+      ok: true,
     };
   }
 }

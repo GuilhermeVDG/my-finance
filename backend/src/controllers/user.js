@@ -9,6 +9,7 @@ export default class User extends Base {
 
     this.detail = this.detail.bind(this);
     this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   async detail(req, res) {
@@ -23,6 +24,15 @@ export default class User extends Base {
   async update(req, res) {
     try {
       const response = await this.userServices.update(req.userId, req.body);
+      this.handleSuccess(res, response);
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const response = await this.userServices.delete(req.userId);
       this.handleSuccess(res, response);
     } catch (error) {
       this.handleError(res, error);
