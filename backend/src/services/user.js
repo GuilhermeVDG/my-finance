@@ -36,8 +36,6 @@ export default class Users extends Base {
         },
       });
 
-      console.log(emailUsed);
-
       if (emailUsed) throw this.handleException('EMAIL_IS_BEEN_USED', 401);
     }
 
