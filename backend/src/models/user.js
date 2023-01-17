@@ -22,6 +22,10 @@ export default class User extends Model {
           type: Sequelize.STRING,
           defaultValue: '',
         },
+        amount: {
+          type: Sequelize.INTEGER,
+          defaultValue: 0,
+        },
       },
       {
         sequelize,
