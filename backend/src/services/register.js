@@ -36,6 +36,8 @@ export default class Register extends Base {
       where: {
         user_id: userId,
       },
+      attributes: ['id', 'type', 'value', 'comment', 'createdAt'],
+      order: [['id', 'DESC']],
     });
 
     if (!history.length) throw this.handleException('HISTORY_NOT_FOUND', 400);
