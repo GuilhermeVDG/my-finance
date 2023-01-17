@@ -30,4 +30,16 @@ export default class Register extends Base {
       createdAt,
     };
   }
+
+  async list(userId) {
+    const history = await History.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+
+    if (!history.length) throw this.handleException('HISTORY_NOT_FOUND', 400);
+
+    return history;
+  }
 }

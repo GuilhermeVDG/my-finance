@@ -11,6 +11,7 @@ export default class Register {
 
   setup() {
     this.routes.post('/store', this.registerController.store);
+    this.routes.get('/list', this.registerController.list);
 
     return this.routes;
   }
