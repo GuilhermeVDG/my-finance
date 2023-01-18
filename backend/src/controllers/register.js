@@ -31,7 +31,7 @@ export default class Register extends Base {
   }
 
   async detail(req, res) {
-    const { id } = req.params;
+    const { id } = req.filter;
     try {
       const response = await this.registerServices.detail(~~id);
       this.handleSuccess(res, response);

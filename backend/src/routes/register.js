@@ -15,7 +15,7 @@ export default class Register {
   setup() {
     this.routes.post('/store', SchemaValidator.validate(registerSchemas.store), this.registerController.store);
     this.routes.get('/list', this.registerController.list);
-    this.routes.get('/detail/:id', this.registerController.detail);
+    this.routes.get('/detail/:id', SchemaValidator.validate(registerSchemas.detail), this.registerController.detail);
 
     return this.routes;
   }
