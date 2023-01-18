@@ -14,7 +14,7 @@ export default class Register extends Base {
 
   async store(req, res) {
     try {
-      const response = await this.registerServices.store(req.userId, req.body);
+      const response = await this.registerServices.store(req.userId, req.data);
       this.handleSuccess(res, response);
     } catch (error) {
       this.handleError(res, error);

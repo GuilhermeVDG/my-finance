@@ -2,6 +2,9 @@ import { Router } from 'express';
 
 import RegisterController from '../controllers/register';
 
+import SchemaValidator from '../middlewares/schemaValidator';
+import registerSchemas from '../schemas/register';
+
 export default class Register {
   constructor() {
     this.routes = new Router();
@@ -10,7 +13,7 @@ export default class Register {
   }
 
   setup() {
-    this.routes.post('/store', this.registerController.store);
+    this.routes.post('/store', SchemaValidator.validate(registerSchemas.store), this.registerController.store);
     this.routes.get('/list', this.registerController.list);
     this.routes.get('/detail/:id', this.registerController.detail);
 
