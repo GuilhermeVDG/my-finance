@@ -13,7 +13,7 @@ export default class Session extends Base {
 
   async store(req, res) {
     try {
-      const response = await this.sessionServices.store(req.body);
+      const response = await this.sessionServices.store(req.data);
       this.handleSuccess(res, response);
     } catch (error) {
       this.handleError(res, error);
@@ -22,7 +22,7 @@ export default class Session extends Base {
 
   async login(req, res) {
     try {
-      const response = await this.sessionServices.login(req.body);
+      const response = await this.sessionServices.login(req.data);
       this.handleSuccess(res, response);
     } catch (error) {
       this.handleError(res, error);

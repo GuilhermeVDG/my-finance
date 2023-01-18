@@ -23,7 +23,7 @@ export default class User extends Base {
 
   async update(req, res) {
     try {
-      const response = await this.userServices.update(req.userId, req.body);
+      const response = await this.userServices.update(req.userId, req.data);
       this.handleSuccess(res, response);
     } catch (error) {
       this.handleError(res, error);
