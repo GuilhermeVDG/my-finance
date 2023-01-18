@@ -9,6 +9,7 @@ export default class Register extends Base {
 
     this.store = this.store.bind(this);
     this.list = this.list.bind(this);
+    this.detail = this.detail.bind(this);
   }
 
   async store(req, res) {
@@ -23,6 +24,16 @@ export default class Register extends Base {
   async list(req, res) {
     try {
       const response = await this.registerServices.list(req.userId);
+      this.handleSuccess(res, response);
+    } catch (error) {
+      this.handleError(res, error);
+    }
+  }
+
+  async detail(req, res) {
+    const { id } = req.params;
+    try {
+      const response = await this.registerServices.detail(~~id);
       this.handleSuccess(res, response);
     } catch (error) {
       this.handleError(res, error);

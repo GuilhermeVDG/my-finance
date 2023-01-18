@@ -36,12 +36,30 @@ export default class Register extends Base {
       where: {
         user_id: userId,
       },
-      attributes: ['id', 'type', 'value', 'comment', 'createdAt'],
+      attributes: ['id', 'type', 'value', 'createdAt'],
       order: [['id', 'DESC']],
     });
 
     if (!history.length) throw this.handleException('HISTORY_NOT_FOUND', 400);
 
     return history;
+  }
+
+  async detail(registerId) {
+    const register = await History.findByPk(registerId);
+
+    if (!register) throw this.handleException('REGISTER_NOT_FOUND', 400);
+
+    const {
+      id, type, value, comment, createdAt,
+    } = register;
+
+    return {
+      id,
+      type,
+      value,
+      comment,
+      createdAt,
+    };
   }
 }
