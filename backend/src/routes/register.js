@@ -16,6 +16,7 @@ export default class Register {
     this.routes.post('/store', SchemaValidator.validate(registerSchemas.store), this.registerController.store);
     this.routes.get('/list', this.registerController.list);
     this.routes.get('/detail/:id', SchemaValidator.validate(registerSchemas.detail), this.registerController.detail);
+    this.routes.delete('/delete/:id', SchemaValidator.validate(registerSchemas.delete), this.registerController.delete);
 
     return this.routes;
   }

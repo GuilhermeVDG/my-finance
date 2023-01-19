@@ -62,4 +62,26 @@ export default class Register extends Base {
       createdAt,
     };
   }
+
+  async delete(userId, registerId) {
+    const register = await History.findByPk(registerId);
+
+    const user = await User.findByPk(userId);
+
+    if (!register) throw this.handleException('REGISTER_NOT_FOUND', 400);
+
+    if (register.type === 'receive' && register.value > user.amount) throw this.handleException('INVALID_VALUE', 400);
+
+    // eslint-disable-next-line no-unused-expressions
+    register.type === 'receive' ? user.amount -= register.value : user.amount += register.value;
+
+    const { amount } = await user.update({ amount: user.amount });
+
+    await register.destroy();
+
+    return {
+      ok: true,
+      amount,
+    };
+  }
 }

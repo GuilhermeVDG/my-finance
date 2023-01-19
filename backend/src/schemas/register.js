@@ -22,4 +22,5 @@ const schemas = {
 export default {
   store: object(schemas.store),
   detail: object(schemas.detail),
+  delete: object(schemas.detail),
 };
