@@ -1,11 +1,17 @@
 import React, { createContext, useState, useEffect } from "react";
 import firebase from '../services/firebaseConnection';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { api } from "../services/api";
 
 export const AuthContext = createContext();
 
 export default function AuthProvider ({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(
+    'id',
+    'name',
+    'email',
+    'token'
+  );
   const [loading, setLoading] = useState(true);
   const [authLoading, setAuthLoading] = useState(false);
 
@@ -55,26 +61,31 @@ export default function AuthProvider ({ children }) {
 
   const signIn = async (email, password) => {
     setAuthLoading(true);
-    await firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(async value => {
-        const uid = value.user.uid;
-        await firebase.database().ref('users').child(uid).once('value')
-          .then(snapshot => {
-            const data = {
-              uid: uid,
-              name: snapshot.val().name,
-              email: value.user.email
-            };
-            setUser(data);
-            storeUser(data);
-            setAuthLoading(false);
-          })
-      })
-      .catch(err => {
-        console.log(err);
-        alert('Usuario ou senha inválidos.')
-        setAuthLoading(false);
-      });
+    
+    try {
+      const response = await api.post('/login', { email, password });
+
+      const { id, token } = response.data.body;
+      const { name } = response.data.body.user;
+
+      const data = { ...response.data.body };
+
+      storeUser(data);
+
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      setUser(
+        id,
+        name,
+        email,
+        token
+      )
+
+      setAuthLoading(false);
+    } catch (error) {
+      console.log(error);
+      setAuthLoading(false);
+    }
   }
 
   const signOut = async () => {
