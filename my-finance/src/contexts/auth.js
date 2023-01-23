@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { api } from "../services/api";
+import { useNavigation } from "@react-navigation/native";
 
 export const AuthContext = createContext();
 
@@ -79,15 +80,19 @@ export default function AuthProvider ({ children }) {
   }
 
   const signOut = async () => {
-    try {
-      await AsyncStorage.clear();
-    } catch (error) {
-      console.log(error);
-    }
+    await AsyncStorage.clear()
+    .then(() => {
+      setUser({
+        id: '',
+        name: '',
+        email: '',
+        token: ''
+      })
+    })
   }
   
   return(
-    <AuthContext.Provider value={{ isAuthenticated: !!user, signUp, signIn, signOut, user, loading, authLoading }}>
+    <AuthContext.Provider value={{ isAuthenticated: !!user.token, signUp, signIn, signOut, user, loading, authLoading }}>
       {children}
     </AuthContext.Provider>
   );
