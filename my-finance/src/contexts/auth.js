@@ -52,9 +52,9 @@ export default function AuthProvider ({ children }) {
 
   const signIn = async (email, password) => {
     setAuthLoading(true);
-    
-    try {
-      const response = await api.post('/login', { email, password });
+
+    try {  
+      const response = await api.post('/login', { email, password });    
 
       const { id, token } = response.data.body;
       const { name } = response.data.body.user;

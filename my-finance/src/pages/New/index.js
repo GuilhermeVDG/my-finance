@@ -7,6 +7,7 @@ import ModalPicker from '../../components/ModalPicker';
 import { format } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../contexts/auth';
+import { api } from '../../services/api';
 
 export default function New() {
   const navigation = useNavigation();
@@ -14,6 +15,7 @@ export default function New() {
   const [value, setValue] = useState('');
   const [modalTypeVisible, setModalTypeVisible] = useState(false);
   const [typeSelected, setTypeSelected] = useState('receive');
+  const [comment, setComment] = useState(' ');
 
   const { user: contextUser } = useContext(AuthContext);
 
@@ -22,7 +24,48 @@ export default function New() {
   }
 
   const handleRegister = () => {
-    alert('test');
+    Keyboard.dismiss();
+    
+    if(isNaN(parseFloat(value))) {
+      Alert.alert(
+        'Alerta!',
+        'Insira um valor válido.',
+        [
+          {
+            text: 'Ok',
+            style: 'default'
+          }
+        ]
+      );
+      return;
+    }
+
+    Alert.alert(
+      `Certeza que deseja cadastrar ${typeSelected === 'expense' ? 'despesa' : 'receita' }?`,
+      `Valor: ${parseFloat(value)}`,
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel'
+        },
+        {
+          text: 'Confirmar',
+          onPress: () => handleAddRegister()
+        }
+      ]
+    );
+  }
+
+  const handleAddRegister = async () => {
+    try {
+      const response = await api.post('/history/store', {
+        type: typeSelected,
+        value,
+        comment
+      });
+    } catch (error) {
+     console.log(error); 
+    }
   }
  
   return (
