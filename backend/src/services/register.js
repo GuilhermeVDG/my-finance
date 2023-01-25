@@ -12,7 +12,7 @@ export default class Register extends Base {
     if (data.type === 'expense' && user.amount < data.value) throw this.handleException('INVALID_VALUE');
 
     // eslint-disable-next-line no-unused-expressions
-    data.type === 'receive' ? user.amount += data.value : user.amount -= data.value;
+    data.type === 'receive' ? user.amount += ~~data.value : user.amount -= ~~data.value;
 
     const { amount } = await user.update({ amount: user.amount });
 

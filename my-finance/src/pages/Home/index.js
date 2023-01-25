@@ -9,12 +9,7 @@ import { Background, Container, Name, Amount, Title, List } from './styles';
 
 export default function Home() {
   const [user, setUser] = useState({});
-  const [history, setHistory] = useState([
-    {key: '1', type: 'receive', value: 1200},
-    {key: '2', type: 'expense', value: 200},
-    {key: '3', type: 'receive', value: 300},
-    {key: '4', type: 'expense', value: 800}
-   ]);
+  const [history, setHistory] = useState([]);
   const [amount, setAmount] = useState(0);
 
   useEffect(() => {
@@ -23,7 +18,13 @@ export default function Home() {
       setUser(findUser.data.body);
     }
 
+    const loadHistory = async () => {
+      const listHist = await api.get('/history/list');
+      setHistory(listHist.data.body);
+    }
+
     loadUser();
+    loadHistory();
   }, []);
   return (
     <Background>
