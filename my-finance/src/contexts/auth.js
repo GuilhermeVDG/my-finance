@@ -10,7 +10,8 @@ export default function AuthProvider ({ children }) {
     id: '',
     name: '',
     email: '',
-    token: ''
+    token: '',
+    amount: ''
   });
   const [loading, setLoading] = useState(true);
   const [authLoading, setAuthLoading] = useState(false);
@@ -69,8 +70,8 @@ export default function AuthProvider ({ children }) {
         id,
         name,
         email,
-        token
-      })
+        token,
+      });
 
       setAuthLoading(false);
     } catch (error) {

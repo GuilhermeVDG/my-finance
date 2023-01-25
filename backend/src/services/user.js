@@ -9,12 +9,15 @@ export default class Users extends Base {
 
     if (!user) throw this.handleException('USER_NOT_FOUND', 400);
 
-    const { id, name, email } = user;
+    const {
+      id, name, email, amount,
+    } = user;
 
     return {
       id,
       name,
       email,
+      amount,
     };
   }
 
