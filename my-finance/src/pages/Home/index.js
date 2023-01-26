@@ -31,7 +31,7 @@ export default function Home() {
       <Header/>
       <Container>
         <Name>{user.name}</Name>
-        <Amount>R$ {user.amount}.00</Amount>
+        <Amount>R$ {user.amount.toFixed(2)}</Amount>
       </Container>
 
       <Title>Ultimas operações</Title>
