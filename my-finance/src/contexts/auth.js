@@ -24,6 +24,8 @@ export default function AuthProvider ({ children }) {
         setUser(JSON.parse(storageUser));
       }
 
+      api.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+
       setLoading(false);
     }
     loadStorage();
@@ -66,11 +68,16 @@ export default function AuthProvider ({ children }) {
 
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
+      const findUser = await api.get('/user/detail');
+
+      const { amount } = findUser.data.body;
+
       setUser({
         id,
         name,
         email,
         token,
+        amount
       });
 
       setAuthLoading(false);
