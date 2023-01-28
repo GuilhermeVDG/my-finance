@@ -14,7 +14,7 @@ export const Input = styled.TextInput.attrs({
   font-size: 17px;
   margin-bottom: 17px;
   margin-top: 10px;
-  padding: 10px;
+  padding: 12px;
   border-radius: 7px;
 `;
 

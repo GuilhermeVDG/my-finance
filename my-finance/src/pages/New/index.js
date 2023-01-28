@@ -15,7 +15,7 @@ export default function New() {
   const [value, setValue] = useState('');
   const [modalTypeVisible, setModalTypeVisible] = useState(false);
   const [typeSelected, setTypeSelected] = useState('receive');
-  const [comment, setComment] = useState(' ');
+  const [comment, setComment] = useState('');
 
   const { user: contextUser } = useContext(AuthContext);
 
@@ -85,6 +85,16 @@ export default function New() {
         <TextSelect>{typeSelected ===  'expense' ? 'Despesa' : 'Receita'}</TextSelect>
         <Feather size={25} name="chevron-down" color="#000000"/>
       </ButtonSelect>
+
+      <Input
+        placeholder="Insira o comentario (Opcional)"
+        keyboardType="text"
+        autoCorrect={false}
+        autoCapitalize="none"
+        value={comment}
+        onChangeText={ value => setComment(value) }
+        returnKeyType="next"
+      />
 
       <ButtonSubmit type={typeSelected} onPress={handleRegister}>
         <ButtonText>Registrar</ButtonText>
