@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { api } from "../services/api";
-import { useNavigation } from "@react-navigation/native";
 
 export const AuthContext = createContext();
 
@@ -28,15 +27,11 @@ export default function AuthProvider ({ children }) {
 
         const { token } = parseUser;
 
-        const { id, name, email } = parseUser.user;
+        const { id, name, email, amount } = parseUser.user;
 
         api.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
         
         try {
-          const findUser = await api.get('/user/detail');
-
-          const { amount } = findUser.data.body;
-
           setUser({
             token,
             user: {
@@ -54,7 +49,7 @@ export default function AuthProvider ({ children }) {
       setLoading(false);
     }
     loadStorage();
-  }, []);
+  });
 
   const signUp = async (name, email, password) => {
     setAuthLoading(true);
@@ -85,17 +80,13 @@ export default function AuthProvider ({ children }) {
       const response = await api.post('/login', { email, password });    
 
       const { token } = response.data.body;
-      const { id, name } = response.data.body.user;
+      const { id, name, amount } = response.data.body.user;
 
       const data = { ...response.data.body };
 
       storeUser(data);
 
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-      const findUser = await api.get('/user/detail');
-
-      const { amount } = findUser.data.body;
 
       setUser({
         token,

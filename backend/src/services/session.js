@@ -35,7 +35,9 @@ export default class Session extends Base {
 
     if (!(await user.checkPassword(data.password))) throw this.handleException('INVALID_PASSWORD', 400);
 
-    const { id, name, email } = user;
+    const {
+      id, name, email, amount,
+    } = user;
 
     const token = jwt.sign({ id, name, email }, authConfig.secret, {
       expiresIn: authConfig.expiresIn,
@@ -47,6 +49,7 @@ export default class Session extends Base {
         id,
         name,
         email,
+        amount,
       },
     };
   }
