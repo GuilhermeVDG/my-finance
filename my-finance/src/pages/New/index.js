@@ -58,11 +58,16 @@ export default function New() {
 
   const handleAddRegister = async () => {
     try {
+      
       const response = await api.post('/history/store', {
         type: typeSelected,
         value,
         comment
       });
+
+      setValue('');
+      Keyboard.dismiss();
+      navigation.navigate('Home');
     } catch (error) {
      console.log(error); 
     }

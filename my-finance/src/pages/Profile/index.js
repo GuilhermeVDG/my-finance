@@ -16,10 +16,10 @@ export default function Profile() {
    <Container>
     <Header/>
     <Name>
-      {user.name}
+      {user.user.name}
     </Name>
     <Email>
-      {user.email}
+      {user.user.email}
     </Email>
     <New onPress={handleNew}>
       <NewText>Registrar gastos</NewText>

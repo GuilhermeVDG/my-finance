@@ -9,10 +9,9 @@ import { Background, Container, Name, Amount, Title, List } from './styles';
 
 
 export default function Home() {
-  const [user, setUser] = useState({});
   const [history, setHistory] = useState([]);
   const [amount, setAmount] = useState(0);
-  const { isAuthenticated, user: userContext } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
 
   useEffect(() => {
@@ -27,8 +26,8 @@ export default function Home() {
     <Background>
       <Header/>
       <Container>
-        <Name>{userContext.name}</Name>
-        <Amount>R$ {userContext.amount ? userContext.amount.toFixed(2) : ''}</Amount>
+        <Name>{user.user.name}</Name>
+        <Amount>R$ {user.user.amount ? user.user.amount.toFixed(2) : ''}</Amount>
       </Container>
 
       <Title>Ultimas operações</Title>

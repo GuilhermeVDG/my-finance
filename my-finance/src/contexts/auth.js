@@ -16,15 +16,39 @@ export default function AuthProvider ({ children }) {
   const [loading, setLoading] = useState(true);
   const [authLoading, setAuthLoading] = useState(false);
 
+  const isAuthenticated = !!user.token;
+
   useEffect(() => {
     const loadStorage = async () => {
-      const storageUser = await AsyncStorage.getItem('auth');
+      const storageUser = await AsyncStorage.getItem('@auth');
 
       if(storageUser) {
-        setUser(JSON.parse(storageUser));
-      }
+        
+        const parseUser = JSON.parse(storageUser);
 
-      api.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+        const { token } = parseUser;
+
+        const { name, email } = parseUser.user;
+
+        api.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+        
+        try {
+          const findUser = await api.get('/user/detail');
+
+          const { amount } = findUser.data.body;
+
+          setUser({
+            token,
+            user: {
+              name,
+              email,
+              amount
+            }
+          });  
+        } catch (error) {
+          console.log(error);
+        }              
+      }
 
       setLoading(false);
     }
@@ -50,7 +74,7 @@ export default function AuthProvider ({ children }) {
   }
 
   const storeUser = async data => {
-    await AsyncStorage.setItem('auth', JSON.stringify(data));
+    await AsyncStorage.setItem('@auth', JSON.stringify(data));
   }
 
   const signIn = async (email, password) => {
@@ -59,7 +83,7 @@ export default function AuthProvider ({ children }) {
     try {  
       const response = await api.post('/login', { email, password });    
 
-      const { id, token } = response.data.body;
+      const { token } = response.data.body;
       const { name } = response.data.body.user;
 
       const data = { ...response.data.body };
@@ -73,11 +97,12 @@ export default function AuthProvider ({ children }) {
       const { amount } = findUser.data.body;
 
       setUser({
-        id,
-        name,
-        email,
         token,
-        amount
+        user: {
+          name,
+          email,
+          amount
+        }
       });
 
       setAuthLoading(false);
@@ -100,7 +125,7 @@ export default function AuthProvider ({ children }) {
   }
   
   return(
-    <AuthContext.Provider value={{ isAuthenticated: !!user.token, signUp, signIn, signOut, user, loading, authLoading }}>
+    <AuthContext.Provider value={{ isAuthenticated , signUp, signIn, signOut, user, loading, authLoading }}>
       {children}
     </AuthContext.Provider>
   );
