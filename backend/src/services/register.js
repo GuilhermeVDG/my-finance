@@ -9,7 +9,7 @@ export default class Register extends Base {
 
     if (!user) throw this.handleException('USER_NOT_FOUND', 400);
 
-    if (data.type === 'expense' && user.amount < data.value) throw this.handleException('INVALID_VALUE');
+    if (data.type === 'expense' && user.amount < data.value) throw this.handleException('INVALID_VALUE', 401);
 
     // eslint-disable-next-line no-unused-expressions
     data.type === 'receive' ? user.amount += ~~data.value : user.amount -= ~~data.value;

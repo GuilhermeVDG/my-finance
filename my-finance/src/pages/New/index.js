@@ -17,7 +17,7 @@ export default function New() {
   const [typeSelected, setTypeSelected] = useState('receive');
   const [comment, setComment] = useState('');
 
-  const { user: contextUser } = useContext(AuthContext);
+  const { user, isAuthenticated } = useContext(AuthContext);
 
   const handleTypeSelected = (option) => {
     setTypeSelected(option);
@@ -57,9 +57,21 @@ export default function New() {
   }
 
   const handleAddRegister = async () => {
+    if(typeSelected === 'expense' && user.user.amount < parseFloat(value)) {
+      Alert.alert(
+        'Seu saldo é menor que o valor desejado.',
+        `Seu saldo: ${user.user.amount}`,
+        [
+          {
+            text: 'Ok',
+            style: 'default'
+          }
+        ]
+      );
+      return;
+    }
     try {
-      
-      const response = await api.post('/history/store', {
+      await api.post('/history/store', {
         type: typeSelected,
         value,
         comment
@@ -69,7 +81,17 @@ export default function New() {
       Keyboard.dismiss();
       navigation.navigate('Home');
     } catch (error) {
-     console.log(error); 
+      console.log(error);
+      Alert.alert(
+        'Alerta!',
+        'Não foi possivel registrar sua movimentação.',
+        [
+          {
+            text: 'Ok',
+            style: 'default'
+          }
+        ]
+      );
     }
   }
  

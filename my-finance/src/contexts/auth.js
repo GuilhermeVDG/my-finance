@@ -28,7 +28,7 @@ export default function AuthProvider ({ children }) {
 
         const { token } = parseUser;
 
-        const { name, email } = parseUser.user;
+        const { id, name, email } = parseUser.user;
 
         api.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
         
@@ -40,6 +40,7 @@ export default function AuthProvider ({ children }) {
           setUser({
             token,
             user: {
+              id,
               name,
               email,
               amount
@@ -84,7 +85,7 @@ export default function AuthProvider ({ children }) {
       const response = await api.post('/login', { email, password });    
 
       const { token } = response.data.body;
-      const { name } = response.data.body.user;
+      const { id, name } = response.data.body.user;
 
       const data = { ...response.data.body };
 
@@ -99,6 +100,7 @@ export default function AuthProvider ({ children }) {
       setUser({
         token,
         user: {
+          id,
           name,
           email,
           amount
@@ -119,7 +121,8 @@ export default function AuthProvider ({ children }) {
         id: '',
         name: '',
         email: '',
-        token: ''
+        token: '',
+        amount: ''
       })
     })
   }

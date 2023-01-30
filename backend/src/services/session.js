@@ -44,6 +44,7 @@ export default class Session extends Base {
     return {
       token,
       user: {
+        id,
         name,
         email,
       },
