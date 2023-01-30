@@ -11,7 +11,7 @@ export default function AuthProvider ({ children }) {
     name: '',
     email: '',
     token: '',
-    amount: ''
+    amount: 0
   });
   const [loading, setLoading] = useState(true);
   const [authLoading, setAuthLoading] = useState(false);
@@ -122,7 +122,7 @@ export default function AuthProvider ({ children }) {
         name: '',
         email: '',
         token: '',
-        amount: ''
+        amount: 0
       })
     })
   }

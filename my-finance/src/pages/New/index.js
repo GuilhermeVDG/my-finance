@@ -17,7 +17,7 @@ export default function New() {
   const [typeSelected, setTypeSelected] = useState('receive');
   const [comment, setComment] = useState('');
 
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const handleTypeSelected = (option) => {
     setTypeSelected(option);
@@ -71,15 +71,24 @@ export default function New() {
       return;
     }
     try {
-      await api.post('/history/store', {
+      const response = await api.post('/history/store', {
         type: typeSelected,
         value,
         comment
       });
 
+      const { id, type, value: respValue, createdAt } = response.data.body;
+      
+      const data = {
+        id,
+        type,
+        value: respValue,
+        createdAt
+      }
+
       setValue('');
       Keyboard.dismiss();
-      navigation.navigate('Home');
+      navigation.navigate('Home', data);
     } catch (error) {
       console.log(error);
       Alert.alert(
