@@ -22,3 +22,17 @@ export const TitleText = styled.Text`
   font-size: 18px;
   font-weight: bold;
 `;
+
+export const ButtonClose = styled.TouchableOpacity`
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  border-radius: 7px;
+`;
+
+export const ButtonCloseText = styled.Text`
+  font-size: 18px;
+  color: #fff;
+  font-weight: bold;
+`;
