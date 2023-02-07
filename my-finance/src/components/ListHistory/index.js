@@ -2,9 +2,9 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import { Container, Type, IconView, TypeText, ValueText } from './styles';
 
-export default function ListHistory({ data }) {
+export default function ListHistory({ data, setVisible }) {
  return (
-   <Container>
+   <Container onPress={setVisible}>
     <Type>
       <IconView type={data.type}>
         <Icon name={data.type === 'receive' ? 'arrow-up' : 'arrow-down'} color="#fff" size={20}/>

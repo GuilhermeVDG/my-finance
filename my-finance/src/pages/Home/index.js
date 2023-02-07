@@ -52,7 +52,7 @@ export default function Home({ route }) {
         showsVerticalScrollIndicator={false}
         data={history}
         keyExtractor={ item => item.id }
-        renderItem={({ item }) => ( <ListHistory  data={item}/> )}
+        renderItem={({ item }) => ( <ListHistory  data={item} setVisible={() => setModalDetailVisible(true)}/> )}
       />
       <Modal transparent={true} visible={modalDetailVisible} animationType="fade">
         <ModalDetail handleCloseModal={() => setModalDetailVisible(false)}/>
