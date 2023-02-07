@@ -1,7 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Modal } from 'react-native';
 import Header from '../../components/Header';
 import ListHistory from '../../components/ListHistory';
 import { api } from '../../services/api';
+import ModalDetail from '../../components/ModalDetail';
 import { format } from 'date-fns';
 
 
@@ -16,6 +18,7 @@ export default function Home({ route }) {
     email: '',
     amount: 0
   }); 
+  const [modalDetailVisible, setModalDetailVisible] = useState(false);
 
 
   useEffect(() => {
@@ -51,6 +54,9 @@ export default function Home({ route }) {
         keyExtractor={ item => item.id }
         renderItem={({ item }) => ( <ListHistory  data={item}/> )}
       />
+      <Modal transparent={true} visible={modalDetailVisible} animationType="fade">
+        <ModalDetail handleCloseModal={() => setModalDetailVisible(false)}/>
+      </Modal>
     </Background>
   );
 }
