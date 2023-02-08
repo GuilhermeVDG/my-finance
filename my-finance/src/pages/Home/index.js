@@ -19,6 +19,7 @@ export default function Home({ route }) {
     amount: 0
   }); 
   const [modalDetailVisible, setModalDetailVisible] = useState(false);
+  const [registerDetail, setRegisterDetail] = useState(false);
 
 
   useEffect(() => {
@@ -38,6 +39,15 @@ export default function Home({ route }) {
     loadUser();
   }, [route.params]);
 
+  const handleSetModalVisible = async (id) => {
+    try {
+      const response = await api.get(`/history/detail/${id}`);
+      setRegisterDetail(response.data.body);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Background>
       <Header/>
@@ -52,7 +62,7 @@ export default function Home({ route }) {
         showsVerticalScrollIndicator={false}
         data={history}
         keyExtractor={ item => item.id }
-        renderItem={({ item }) => ( <ListHistory  data={item} setVisible={() => setModalDetailVisible(true)}/> )}
+        renderItem={({ item }) => ( <ListHistory  data={item} setVisible={handleSetModalVisible}/> )}
       />
       <Modal transparent={true} visible={modalDetailVisible} animationType="fade">
         <ModalDetail handleCloseModal={() => setModalDetailVisible(false)}/>
