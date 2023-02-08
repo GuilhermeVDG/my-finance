@@ -40,6 +40,7 @@ export default function Home({ route }) {
   }, [route.params]);
 
   const handleSetModalVisible = async (id) => {
+    setModalDetailVisible(true);
     try {
       const response = await api.get(`/history/detail/${id}`);
       setRegisterDetail(response.data.body);
@@ -65,7 +66,7 @@ export default function Home({ route }) {
         renderItem={({ item }) => ( <ListHistory  data={item} setVisible={handleSetModalVisible}/> )}
       />
       <Modal transparent={true} visible={modalDetailVisible} animationType="fade">
-        <ModalDetail handleCloseModal={() => setModalDetailVisible(false)}/>
+        <ModalDetail handleCloseModal={() => setModalDetailVisible(false)} data={registerDetail}/>
       </Modal>
     </Background>
   );

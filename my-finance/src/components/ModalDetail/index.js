@@ -1,11 +1,18 @@
 import React from 'react';
 import { Container, Content, TitleText, ButtonClose, ButtonCloseText } from './styles';
+import { format } from 'date-fns';
 
-export default function ModalDetail ({ handleCloseModal }) {
+export default function ModalDetail ({ handleCloseModal, data }) {
   return(
     <Container>
       <Content>
-        <TitleText>DETAIL</TitleText>
+        <TitleText>Valor: R${data.value.toFixed(2)}</TitleText>
+        <TitleText>Tipo: {data.type === 'receive' ? 'Receita' : 'Despesa'}</TitleText>
+        {data.comment && (
+          <TitleText>Comentário: {data.comment}</TitleText>
+          )}
+        <TitleText>Data: {format(data.createdAt, 'dd/MM/yyyy')}</TitleText>
+        <TitleText></TitleText>
         <ButtonClose onPress={ () => handleCloseModal() }>
           <ButtonCloseText>Fechar</ButtonCloseText>
         </ButtonClose>

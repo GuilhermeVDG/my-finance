@@ -15,7 +15,9 @@ export const Content = styled.View`
   background-color: #ddd;
   border-width: 1px;
   border-color: #000;
-  border-radius: 4px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TitleText = styled.Text`
@@ -29,6 +31,7 @@ export const ButtonClose = styled.TouchableOpacity`
   justify-content: center;
   background-color: red;
   border-radius: 7px;
+  width: 90%;
 `;
 
 export const ButtonCloseText = styled.Text`
