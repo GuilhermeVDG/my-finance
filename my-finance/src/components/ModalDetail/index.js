@@ -11,7 +11,7 @@ export default function ModalDetail ({ handleCloseModal, data }) {
         {data.comment && (
           <TitleText>Comentário: {data.comment}</TitleText>
           )}
-        <TitleText>Data: {format(data.createdAt, 'dd/MM/yyyy')}</TitleText>
+        <TitleText>Data: {(data.createdAt)}</TitleText>
         <TitleText></TitleText>
         <ButtonClose onPress={ () => handleCloseModal() }>
           <ButtonCloseText>Fechar</ButtonCloseText>
