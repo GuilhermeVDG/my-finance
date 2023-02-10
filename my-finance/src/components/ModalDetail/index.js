@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Content, TitleText, ButtonClose, ButtonCloseText } from './styles';
-import { format } from 'date-fns';
+import moment from 'moment';
 
 export default function ModalDetail ({ handleCloseModal, data }) {
   return(
@@ -11,7 +11,7 @@ export default function ModalDetail ({ handleCloseModal, data }) {
         {data.comment && (
           <TitleText>Comentário: {data.comment}</TitleText>
           )}
-        <TitleText>Data: {(data.createdAt)}</TitleText>
+        <TitleText>Data: {moment(data.createdAt).format('DD/MM/YYYY')}</TitleText>
         <TitleText></TitleText>
         <ButtonClose onPress={ () => handleCloseModal() }>
           <ButtonCloseText>Fechar</ButtonCloseText>

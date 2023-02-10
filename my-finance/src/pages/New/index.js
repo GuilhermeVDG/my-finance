@@ -4,7 +4,6 @@ import Header from '../../components/Header';
 import { Feather } from '@expo/vector-icons';
 import { TouchableWithoutFeedback, Keyboard, Modal, Alert } from 'react-native';
 import ModalPicker from '../../components/ModalPicker';
-import { format } from 'date-fns';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../contexts/auth';
 import { api } from '../../services/api';

@@ -4,7 +4,6 @@ import Header from '../../components/Header';
 import ListHistory from '../../components/ListHistory';
 import { api } from '../../services/api';
 import ModalDetail from '../../components/ModalDetail';
-import { format } from 'date-fns';
 
 
 import { Background, Container, Name, Amount, Title, List } from './styles';
@@ -40,10 +39,10 @@ export default function Home({ route }) {
   }, [route.params]);
 
   const handleSetModalVisible = async (id) => {
-    setModalDetailVisible(true);
     try {
       const response = await api.get(`/history/detail/${id}`);
       setRegisterDetail(response.data.body);
+      setModalDetailVisible(true);
     } catch (error) {
       console.log(error);
     }
