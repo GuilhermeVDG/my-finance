@@ -10,7 +10,7 @@ export const Container = styled.TouchableOpacity`
 `;
 
 export const Content = styled.View`
-  height: 50%;
+  height: 40%;
   width: 90%;
   background-color: #ddd;
   border-width: 1px;

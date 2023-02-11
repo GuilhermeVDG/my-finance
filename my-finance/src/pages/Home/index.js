@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal } from 'react-native';
 import Header from '../../components/Header';
 import ListHistory from '../../components/ListHistory';
 import { api } from '../../services/api';
 import ModalDetail from '../../components/ModalDetail';
+import { AuthContext } from '../../contexts/auth';
 
 
 import { Background, Container, Name, Amount, Title, List } from './styles';
@@ -19,6 +20,7 @@ export default function Home({ route }) {
   }); 
   const [modalDetailVisible, setModalDetailVisible] = useState(false);
   const [registerDetail, setRegisterDetail] = useState(false);
+  const { signOut } = useContext(AuthContext);
 
 
   useEffect(() => {
@@ -31,8 +33,13 @@ export default function Home({ route }) {
       }
     }
     const loadUser = async () => {
-      const findUser = await api.get('/user/detail');
-      setUser(findUser.data.body);
+      try {
+        const findUser = await api.get('/user/detail');
+        setUser(findUser.data.body);
+      } catch (error) {
+        signOut();
+        console.log(error);
+      }
     }
     loadHistory();
     loadUser();
