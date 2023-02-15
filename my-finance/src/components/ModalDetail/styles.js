@@ -39,3 +39,18 @@ export const ButtonCloseText = styled.Text`
   color: #fff;
   font-weight: bold;
 `;
+
+export const ButtonDelete = styled.TouchableOpacity`
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  width: 90%;
+  background-color: #2d2d2e;
+`;
+
+export const ButtonDeleteText = styled.Text`
+  font-size: 18px;
+  color: #fff;
+  font-weight: bold;
+`;
