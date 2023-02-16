@@ -41,6 +41,7 @@ export const ButtonCloseText = styled.Text`
 `;
 
 export const ButtonDelete = styled.TouchableOpacity`
+  margin-top: 10px;
   height: 45px;
   align-items: center;
   justify-content: center;

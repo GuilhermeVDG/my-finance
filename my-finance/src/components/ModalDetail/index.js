@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Content, TitleText, ButtonClose, ButtonCloseText, ButtonDelete, ButtonDelete, ButtonDeleteText } from './styles';
+import { Container, Content, TitleText, ButtonClose, ButtonCloseText, ButtonDelete, ButtonDeleteText } from './styles';
 import moment from 'moment';
 
 export default function ModalDetail ({ handleCloseModal, data }) {
@@ -21,7 +21,7 @@ export default function ModalDetail ({ handleCloseModal, data }) {
           <ButtonCloseText>Fechar</ButtonCloseText>
         </ButtonClose>
 
-        <ButtonDelete>
+        <ButtonDelete onPress={ () => handleDelete(data.id) }>
           <ButtonDeleteText>Deletar Operação</ButtonDeleteText>
         </ButtonDelete>
       </Content>

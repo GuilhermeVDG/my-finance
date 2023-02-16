@@ -55,6 +55,15 @@ export default function Home({ route }) {
     }
   }
 
+  const handleDeleteRegister = async id => {
+    try {
+      await api.delete(`/history/delete/${id}`);
+      setModalDetailVisible(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Background>
       <Header/>
@@ -72,7 +81,7 @@ export default function Home({ route }) {
         renderItem={({ item }) => ( <ListHistory  data={item} setVisible={handleSetModalVisible}/> )}
       />
       <Modal transparent={true} visible={modalDetailVisible} animationType="fade">
-        <ModalDetail handleCloseModal={() => setModalDetailVisible(false)} data={registerDetail}/>
+        <ModalDetail handleCloseModal={() => setModalDetailVisible(false)} data={registerDetail} handleDelete={handleDeleteRegister} />
       </Modal>
     </Background>
   );
