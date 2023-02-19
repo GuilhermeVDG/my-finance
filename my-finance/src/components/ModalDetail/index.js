@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Content, TitleText, ButtonClose, ButtonCloseText, ButtonDelete, ButtonDeleteText } from './styles';
 import moment from 'moment';
 
-export default function ModalDetail ({ handleCloseModal, data }) {
+export default function ModalDetail ({ handleCloseModal, data, handleDelete }) {
   return(
     <Container>
       <Content>
