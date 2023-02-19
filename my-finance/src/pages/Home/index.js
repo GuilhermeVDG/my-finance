@@ -21,6 +21,7 @@ export default function Home({ route }) {
   const [modalDetailVisible, setModalDetailVisible] = useState(false);
   const [registerDetail, setRegisterDetail] = useState(false);
   const { signOut } = useContext(AuthContext);
+  const [hasNewData, setHasNewData] = useState(false);
 
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function Home({ route }) {
     }
     loadHistory();
     loadUser();
-  }, [route.params]);
+  }, [route.params, hasNewData]);
 
   const handleSetModalVisible = async (id) => {
     try {
@@ -58,6 +59,7 @@ export default function Home({ route }) {
   const handleDeleteRegister = async id => {
     try {
       await api.delete(`/history/delete/${id}`);
+      hasNewData ? setHasNewData(false) : setHasNewData(true);
       setModalDetailVisible(false);
     } catch (error) {
       console.log(error);
