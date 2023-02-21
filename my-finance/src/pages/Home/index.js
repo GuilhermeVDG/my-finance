@@ -7,7 +7,7 @@ import ModalDetail from '../../components/ModalDetail';
 import { AuthContext } from '../../contexts/auth';
 
 
-import { Background, Container, Name, Amount, Title, List } from './styles';
+import { Background, Container, Name, Amount, Title, List, TextList } from './styles';
 
 
 export default function Home({ route }) {
@@ -22,6 +22,7 @@ export default function Home({ route }) {
   const [registerDetail, setRegisterDetail] = useState(false);
   const { signOut } = useContext(AuthContext);
   const [hasNewData, setHasNewData] = useState(false);
+  const [hasNoHist, setHasNoHist] = useState(false);
 
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function Home({ route }) {
         setHistory(listHist.data.body);
       } catch (error) {
         console.log(error);
+        setHasNoHist(true);
       }
     }
     const loadUser = async () => {
@@ -76,12 +78,14 @@ export default function Home({ route }) {
 
       <Title>Ultimas operações</Title>
 
+      {hasNoHist ? <TextList>Nenhum registro foi encontrado</TextList> : 
       <List
         showsVerticalScrollIndicator={false}
         data={history}
         keyExtractor={ item => item.id }
         renderItem={({ item }) => ( <ListHistory  data={item} setVisible={handleSetModalVisible}/> )}
-      />
+      />}
+      
       <Modal transparent={true} visible={modalDetailVisible} animationType="fade">
         <ModalDetail handleCloseModal={() => setModalDetailVisible(false)} data={registerDetail} handleDelete={handleDeleteRegister} />
       </Modal>

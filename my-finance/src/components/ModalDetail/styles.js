@@ -29,7 +29,7 @@ export const ButtonClose = styled.TouchableOpacity`
   height: 45px;
   align-items: center;
   justify-content: center;
-  background-color: red;
+  background-color: #ff3f4b;
   border-radius: 7px;
   width: 90%;
 `;

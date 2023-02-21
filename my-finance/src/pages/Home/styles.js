@@ -38,3 +38,11 @@ export const List = styled.FlatList`
   margin-left: 15px;
   margin-right: 15px;
 `;
+
+export const TextList = styled.Text`
+  color: #ff3f4b;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 15px;
+`;
