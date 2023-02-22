@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { Op } from 'sequelize';
 import Base from './base';
 import User from '../models/user';
 import History from '../models/history';
@@ -35,6 +36,9 @@ export default class Register extends Base {
     const history = await History.findAll({
       where: {
         user_id: userId,
+        createdAt: {
+          [Op.between]: [new Date(new Date() - 51 * 60 * 60 * 10000), new Date()],
+        },
       },
       attributes: ['id', 'type', 'value', 'createdAt'],
       order: [['id', 'DESC']],

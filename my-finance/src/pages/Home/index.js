@@ -73,7 +73,7 @@ export default function Home({ route }) {
       <Header/>
       <Container>
         <Name>{user.name}</Name>
-        <Amount>R$ {user.amount ? user.amount.toFixed(2) : ''}</Amount>
+        <Amount>R$ {user.amount ? user.amount.toFixed(2) : '0,00'}</Amount>
       </Container>
 
       <Title>Ultimas operações</Title>
