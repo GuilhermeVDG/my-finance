@@ -7,7 +7,7 @@ import ModalDetail from '../../components/ModalDetail';
 import { AuthContext } from '../../contexts/auth';
 
 
-import { Background, Container, Name, Amount, Title, List, TextList } from './styles';
+import { Background, Container, Name, Amount, Title, List, TextList, ContainerList } from './styles';
 
 
 export default function Home({ route }) {
@@ -73,12 +73,12 @@ export default function Home({ route }) {
       <Header/>
       <Container>
         <Name>{user.name}</Name>
-        <Amount>R$ {user.amount ? user.amount.toFixed(2) : '0,00'}</Amount>
+        <Amount>R$ {user.amount ? user.amount.toFixed(2) : '0.00'}</Amount>
       </Container>
 
       <Title>Ultimas operações</Title>
 
-      {hasNoHist ? <TextList>Nenhum registro foi encontrado</TextList> : 
+      {hasNoHist ? <ContainerList><TextList>Nenhum registro foi encontrado</TextList></ContainerList> : 
       <List
         showsVerticalScrollIndicator={false}
         data={history}

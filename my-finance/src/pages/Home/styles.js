@@ -39,6 +39,16 @@ export const List = styled.FlatList`
   margin-right: 15px;
 `;
 
+export const ContainerList = styled.View`
+  background-color: #fff;
+  padding-top: 15px;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  margin-left: 15px;
+  margin-right: 15px;
+  height: 100%;
+`;
+
 export const TextList = styled.Text`
   color: #ff3f4b;
   margin-top: 10px;
